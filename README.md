@@ -31,6 +31,14 @@ This repo is a Claude Code plugin marketplace. Inside any Claude Code session:
 
 The skill is picked up automatically from the plugin's `skills/` directory, and updates flow through the plugin system.
 
+### Ask Claude Code to install it
+
+Paste this straight into a Claude Code prompt:
+
+```
+Install the fableplan skill from https://github.com/richkuo/fableplan into ~/.claude/skills — fetch skills/fableplan/SKILL.md and place it at ~/.claude/skills/fableplan/SKILL.md
+```
+
 ### With `npx skills`
 
 If you use [Vercel Labs' `skills` CLI](https://github.com/vercel-labs/skills), it discovers the `skills/fableplan/SKILL.md` layout automatically:
