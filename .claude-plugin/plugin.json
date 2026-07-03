@@ -1,0 +1,12 @@
+{
+  "name": "fableplan",
+  "displayName": "fableplan",
+  "version": "1.0.0",
+  "description": "Delegates implementation planning to a Fable 5 planning subagent, then builds from the vetted plan — posting it to a referenced GitHub issue along the way.",
+  "author": {
+    "name": "Richard Kuo"
+  },
+  "repository": "https://github.com/richkuo/fableplan",
+  "license": "MIT",
+  "keywords": ["planning", "fable", "subagent", "github-issues"]
+}

@@ -20,14 +20,44 @@ The skill then runs a 7-step flow:
 
 ## Install
 
-Copy the skill into your Claude Code skills directory:
+### As a plugin (recommended)
+
+This repo is a Claude Code plugin marketplace. Inside any Claude Code session:
 
 ```
-git clone https://github.com/richkuo/fableplan.git
-cp -r fableplan/skills/fableplan ~/.claude/skills/fableplan
+/plugin marketplace add richkuo/fableplan
+/plugin install fableplan@fableplan
 ```
 
-Or drop the `skills/fableplan/` folder anywhere Claude Code discovers skills. Restart your session and invoke it with `/fableplan`.
+The skill is picked up automatically from the plugin's `skills/` directory, and updates flow through the plugin system.
+
+### With `npx skills`
+
+If you use [Vercel Labs' `skills` CLI](https://github.com/vercel-labs/skills), it discovers the `skills/fableplan/SKILL.md` layout automatically:
+
+```sh
+npx skills add richkuo/fableplan
+```
+
+This installs into `.claude/skills/` (and any other agents it detects). It's a third-party tool, separate from the official plugin marketplace above.
+
+### Manual (single file)
+
+A Claude Code skill is just a directory containing a `SKILL.md`, so you can also install it with one command — no clone needed:
+
+```sh
+mkdir -p ~/.claude/skills/fableplan && curl -fsSL https://raw.githubusercontent.com/richkuo/fableplan/master/skills/fableplan/SKILL.md -o ~/.claude/skills/fableplan/SKILL.md
+```
+
+This puts it in your personal skills directory (`~/.claude/skills/`), available in every project. To scope it to a single project instead, put the file at `<repo>/.claude/skills/fableplan/SKILL.md`.
+
+### Verify
+
+Start a new Claude Code session (or restart the current one), then run:
+
+```
+/fableplan <task to plan>
+```
 
 ## Requirements
 

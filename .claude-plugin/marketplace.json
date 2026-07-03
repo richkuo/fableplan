@@ -1,0 +1,14 @@
+{
+  "name": "fableplan",
+  "description": "Marketplace for the fableplan Claude Code plugin: Fable 5-driven implementation planning before building.",
+  "owner": {
+    "name": "Richard Kuo"
+  },
+  "plugins": [
+    {
+      "name": "fableplan",
+      "source": "./",
+      "description": "Delegates implementation planning to a Fable 5 planning subagent, then builds from the vetted plan — posting it to a referenced GitHub issue along the way."
+    }
+  ]
+}
