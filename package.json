@@ -1,0 +1,37 @@
+{
+  "name": "@fableplan/fableplan",
+  "version": "1.0.0",
+  "description": "Installer for the fableplan Claude Code skill: plan with Fable 5, build with your main-session model.",
+  "type": "module",
+  "bin": {
+    "fableplan": "bin/install.mjs"
+  },
+  "files": [
+    "bin",
+    "skills",
+    ".claude-plugin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "skill",
+    "plugin",
+    "fable",
+    "planning"
+  ],
+  "homepage": "https://github.com/richkuo/fableplan#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richkuo/fableplan.git"
+  },
+  "author": "Richard Kuo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

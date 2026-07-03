@@ -31,6 +31,16 @@ This repo is a Claude Code plugin marketplace. Inside any Claude Code session:
 
 The skill is picked up automatically from the plugin's `skills/` directory, and updates flow through the plugin system.
 
+### With `npx` (npm)
+
+Published to npm as [`@fableplan/fableplan`](https://www.npmjs.com/package/@fableplan/fableplan). One command copies the skill into `~/.claude/skills/`:
+
+```sh
+npx @fableplan/fableplan
+```
+
+Add `--project` to install into the current repo's `.claude/skills/` instead of your personal directory.
+
 ### Ask Claude Code to install it
 
 Paste this straight into a Claude Code prompt:
