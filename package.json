@@ -1,6 +1,6 @@
 {
   "name": "@fableplan/fableplan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installer for the fableplan Claude Code skill: plan with Fable 5, build with your main-session model.",
   "type": "module",
   "bin": {
