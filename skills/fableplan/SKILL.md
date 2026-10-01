@@ -40,6 +40,10 @@ Do not re-plan the task yourself first — the subagent owns the plan. Snapshot 
 - `description`: `Plan <short task name>`
 - `prompt`: Hand the subagent everything it needs to plan independently — the full task description, the issue title/body if one was fetched, the working directory, and any constraints the user stated. Tell it explicitly:
   - Produce a concrete, ordered implementation plan (files to create/modify, the approach, build sequence, risks/edge cases, and how to verify).
+  - Before planning, read the repo's CLAUDE.md and AGENTS.md files (root and any in directories the plan touches) and follow their conventions. Name any convention the plan relies on.
+  - Cite every load-bearing claim about the existing code with a `file:line` reference (files to modify, functions or symbols it calls, behavior it depends on), so each claim can be checked against the code. Never cite a location it has not read.
+  - Include an `Open questions and assumptions` section. List every assumption it made where the task, issue, or code was unclear, and every decision the user must make. Write "None" if there are none. Never resolve an ambiguity silently.
+  - Include an `Acceptance criteria` section of observable, checkable outcomes, and a `Verification` section with the exact commands to run (build, lint, type check, integration tests) and the result each must produce.
   - Plan the absolute-best solution the task calls for, evaluated as if cost, effort, time, token spend, and code volume were unlimited — they are not factors and must never narrow the option space. The only constraints that override "best" are correctness and safety.
   - Return the plan as its final message in clean Markdown suitable to (a) act on directly and (b) post verbatim as a GitHub issue comment.
   - It is planning only — it must NOT make code edits, including via Bash (no writing/modifying files, no commits). The subagent lacks Edit/Write, but still has Bash, so this must be stated explicitly.
@@ -54,7 +58,7 @@ When the result arrives:
 
 ### 3. Sanity-check the plan against the code
 
-Before posting or presenting it, verify the plan's load-bearing claims against the actual codebase: the files it says to modify exist, the functions/symbols it references are real, and it doesn't contradict repo conventions (CLAUDE.md). Fix small inaccuracies yourself and note them; if the plan is structurally wrong (built on a file or mechanism that doesn't exist), do NOT automatically re-dispatch the Plan subagent — stop and tell the user what's failing, and let them decide whether to re-plan with Fable 5.1, adjust the task, or proceed anyway. If you fixed small inaccuracies, update the scratchpad file from step 2 so it reflects the corrected plan before step 4 posts it.
+Before posting or presenting it, verify the plan's load-bearing claims against the actual codebase: open each `file:line` citation and confirm it says what the plan claims, the files it says to modify exist, the functions/symbols it references are real, and it doesn't contradict repo conventions (CLAUDE.md, AGENTS.md). Treat a load-bearing claim with no citation as unverified until you check it. Fix small inaccuracies yourself and note them; if the plan is structurally wrong (built on a file or mechanism that doesn't exist), do NOT automatically re-dispatch the Plan subagent — stop and tell the user what's failing, and let them decide whether to re-plan with Fable 5.1, adjust the task, or proceed anyway. If you fixed small inaccuracies, update the scratchpad file from step 2 so it reflects the corrected plan before step 4 posts it.
 
 ### 4. Post the plan to the GitHub issue (only if one was resolved in step 1)
 
@@ -89,7 +93,7 @@ Do all of step 7's building inside that worktree. When the build is done, follow
 
 ### 7. Build
 
-In the worktree from step 6, the main agent builds the task per the plan. Confirm with the user first only if the plan reveals ambiguity or a decision the user must make; otherwise proceed.
+In the worktree from step 6, the main agent builds the task per the plan. Confirm with the user first only if the plan's `Open questions and assumptions` section, or the build itself, reveals ambiguity or a decision the user must make; otherwise proceed. Before you report the build as done, run every command in the plan's `Verification` section and confirm each acceptance criterion.
 
 ## Notes
 
