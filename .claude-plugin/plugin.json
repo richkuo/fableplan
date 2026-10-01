@@ -1,7 +1,7 @@
 {
   "name": "fableplan",
   "displayName": "fableplan",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Delegates implementation planning to a Fable 5.1 planning subagent, then builds from the vetted plan — posting it to a referenced GitHub issue along the way.",
   "author": {
     "name": "Richard Kuo"
