@@ -8,15 +8,16 @@ The idea: let a dedicated planning model (Fable 5.1) produce a concrete, ordered
 
 Trigger it with `/fableplan`, "fableplan this", or "plan this with fable", plus a task description and optionally a GitHub issue (`#N`, a full URL, or `owner/repo#N`).
 
-The skill then runs a 7-step flow:
+The skill then runs an 8-step flow:
 
 1. **Resolve the GitHub issue** (only if one is referenced) so the planner works from the real requirements, not a paraphrase.
 2. **Dispatch the Fable 5.1 Plan subagent**, confirm it made no edits, and save the plan verbatim to a scratch file. The plan follows the repo's `CLAUDE.md`/`AGENTS.md` conventions, cites `file:line` for its claims about the code, lists open questions and assumptions, and gives acceptance criteria and exact verification commands.
 3. **Sanity-check the plan** against the actual codebase (each `file:line` citation, files, symbols, conventions). It stops and asks you if the plan is structurally wrong rather than silently re-planning.
-4. **Post the vetted plan** to the GitHub issue as a comment (only if one was referenced).
+4. **Post the vetted plan** to the GitHub issue as a comment (only if one was referenced). The heading and footer name the model and effort that actually produced the plan.
 5. **Present the plan** to you.
-6. **Set up an isolated git worktree** so the build never touches your current workspace.
-7. **Build** the task from the plan, inside that worktree, then run the plan's verification commands before reporting done.
+6. **Ask whether to build now** (only if an issue was referenced). If you stop, the plan stays on the issue for a later build.
+7. **Set up an isolated git worktree** on an agent-prefixed branch (`cc/fableplan/<task>` on Claude Code) so the build never touches your current workspace.
+8. **Build** the task from the plan, inside that worktree, then run the plan's verification commands before reporting done.
 
 ## Install
 
