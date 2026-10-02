@@ -1,7 +1,7 @@
 {
   "name": "@fableplan/fableplan",
   "version": "1.1.0",
-  "description": "Installer for the fableplan Claude Code skill: plan with Fable 5.1, build with your main-session model.",
+  "description": "Installer for the fableplan Claude Code skill: plan with Fable 5.1, check the plan, and post it to the issue.",
   "type": "module",
   "bin": {
     "fableplan": "bin/install.mjs"

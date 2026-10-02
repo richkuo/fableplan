@@ -1,22 +1,20 @@
 # fableplan
 
-A [Claude Code](https://claude.com/claude-code) skill that delegates implementation planning to a **Fable 5.1** planning subagent, then builds from that plan in your main session — and, when a GitHub issue is referenced, posts the vetted plan to the issue as a comment.
+A [Claude Code](https://claude.com/claude-code) skill that delegates implementation planning to a **Fable 5.1** planning subagent, checks the plan in your main session, and, when a GitHub issue is referenced, posts the vetted plan to the issue as a comment. Then it stops.
 
-The idea: let a dedicated planning model (Fable 5.1) produce a concrete, ordered implementation plan before any code is written, review it against the real codebase, preserve it on the tracker, and only then build — in an isolated git worktree so your working tree is never touched.
+The idea: let a dedicated planning model (Fable 5.1) produce a concrete, ordered implementation plan before any code is written, review it against the real codebase, and preserve it on the tracker. The skill never builds; you build from the plan when you choose to.
 
 ## What it does
 
 Trigger it with `/fableplan`, "fableplan this", or "plan this with fable", plus a task description and optionally a GitHub issue (`#N`, a full URL, or `owner/repo#N`).
 
-The skill then runs a 7-step flow:
+The skill then runs a 5-step flow:
 
 1. **Resolve the GitHub issue** (only if one is referenced) so the planner works from the real requirements, not a paraphrase.
 2. **Dispatch the Fable 5.1 Plan subagent**, confirm it made no edits, and save the plan verbatim to a scratch file. The plan follows the repo's `CLAUDE.md`/`AGENTS.md` conventions, cites `file:line` for its claims about the code, lists open questions and assumptions, and gives acceptance criteria and exact verification commands.
 3. **Sanity-check the plan** against the actual codebase (each `file:line` citation, files, symbols, conventions). It stops and asks you if the plan is structurally wrong rather than silently re-planning.
-4. **Post the vetted plan** to the GitHub issue as a comment (only if one was referenced).
-5. **Present the plan** to you.
-6. **Set up an isolated git worktree** so the build never touches your current workspace.
-7. **Build** the task from the plan, inside that worktree, then run the plan's verification commands before reporting done.
+4. **Post the vetted plan** to the GitHub issue as a comment (only if one was referenced). The heading and footer name the model and effort that actually produced the plan.
+5. **Present the plan** to you, then stop. The skill never builds.
 
 ## Install
 
@@ -81,7 +79,7 @@ Start a new Claude Code session (or restart the current one), then run:
 
 - Claude Code with access to the `fable` model for the planning subagent.
 - `gh` (GitHub CLI), authenticated, if you want the issue-comment step.
-- A git repository for the build step (the skill stops and asks if the working directory isn't one).
+- A local clone of the repository when you plan against a GitHub issue.
 
 ## Notes
 
