@@ -1,8 +1,8 @@
 # fableplan
 
-A [Claude Code](https://claude.com/claude-code) skill that delegates implementation planning to a **Fable 5.1** planning subagent, checks the plan in your main session, and, when a GitHub issue is referenced, posts the vetted plan to the issue as a comment. Then it stops.
+A [Claude Code](https://claude.com/claude-code) skill that delegates implementation planning to a **Fable 5.2** planning subagent, checks the plan in your main session, and, when a GitHub issue is referenced, posts the vetted plan to the issue as a comment. Then it stops.
 
-The idea: let a dedicated planning model (Fable 5.1) produce a concrete, ordered implementation plan before any code is written, review it against the real codebase, and preserve it on the tracker. The skill never builds; you build from the plan when you choose to.
+The idea: let a dedicated planning model (Fable 5.2) produce a concrete, ordered implementation plan before any code is written, review it against the real codebase, and preserve it on the tracker. The skill never builds; you build from the plan when you choose to.
 
 ## What it does
 
@@ -11,7 +11,7 @@ Trigger it with `/fableplan`, "fableplan this", or "plan this with fable", plus 
 The skill then runs a 5-step flow:
 
 1. **Resolve the GitHub issue** (only if one is referenced) so the planner works from the real requirements, not a paraphrase.
-2. **Dispatch the Fable 5.1 Plan subagent**, confirm it made no edits, and save the plan verbatim to a scratch file. The plan follows the repo's `CLAUDE.md`/`AGENTS.md` conventions, cites `file:line` for its claims about the code, lists open questions and assumptions, and gives acceptance criteria and exact verification commands.
+2. **Dispatch the Fable 5.2 Plan subagent**, confirm it made no edits, and save the plan verbatim to a scratch file. The plan follows the repo's `CLAUDE.md`/`AGENTS.md` conventions, cites `file:line` for its claims about the code, lists open questions and assumptions, and gives acceptance criteria and exact verification commands.
 3. **Sanity-check the plan** against the actual codebase (each `file:line` citation, files, symbols, conventions). It stops and asks you if the plan is structurally wrong rather than silently re-planning.
 4. **Post the vetted plan** to the GitHub issue as a comment (only if one was referenced). The heading and footer name the model and effort that actually produced the plan.
 5. **Present the plan** to you, then stop. The skill never builds.
@@ -83,7 +83,7 @@ Start a new Claude Code session (or restart the current one), then run:
 
 ## Notes
 
-- The planning subagent always runs on Fable 5.1 regardless of your main session's model.
+- The planning subagent always runs on Fable 5.2 regardless of your main session's model.
 - The skill adapts to the target repo's conventions (e.g. its `CLAUDE.md` or `AGENTS.md`); behavior isn't hardcoded to any one project.
 
 ## License

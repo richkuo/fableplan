@@ -2,7 +2,7 @@
   "name": "fableplan",
   "displayName": "fableplan",
   "version": "2.0.0",
-  "description": "Delegates implementation planning to a Fable 5.1 planning subagent, checks the plan, and posts it to a referenced GitHub issue. It never builds.",
+  "description": "Delegates implementation planning to a Fable 5.2 planning subagent, checks the plan, and posts it to a referenced GitHub issue. It never builds.",
   "author": {
     "name": "Richard Kuo"
   },
